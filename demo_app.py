@@ -5,7 +5,7 @@ import numpy as np
 with st.echo(code_location='below'):
     st.title("Hello, World!")
     """
-    This is a test.
+    This фффф is a test.
     """
     x = np.linspace(0, 10, 500)
     fig = plt.figure()
