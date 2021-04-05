@@ -6,7 +6,6 @@ from celluloid import Camera
 
 # Based on this recipe:
 # https://discuss.streamlit.io/t/matplotlib-animation-in-streamlit-through-html-js/5587
-d
 with st.echo(code_location='below'):
     st.title("Hello, World!")
     """
