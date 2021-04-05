@@ -17,4 +17,5 @@ with st.echo(code_location='below'):
     GlobalTempCountry = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalLandTemperaturesByCountry.csv")
     GlobalTempState = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalLandTemperaturesByState.csv")
 
+    st.write(GlobalTemp)
 
