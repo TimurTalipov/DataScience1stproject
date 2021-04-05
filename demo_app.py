@@ -6,6 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from celluloid import Camera
 from pandas import read_csv
+from plotly.offline import iplot
 # Based on this recipe:
 # https://discuss.streamlit.io/t/matplotlib-animation-in-streamlit-through-html-js/5587
 with st.echo(code_location='below'):
