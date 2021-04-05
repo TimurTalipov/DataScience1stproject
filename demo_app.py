@@ -19,7 +19,7 @@ with st.echo(code_location='below'):
     GlobalTempMajorCity = pd.read_csv("https://gist.githubusercontent.com/TimurTalipov/7b1b830dbdec4fe9e6a3816ab5a0e08d/raw/eac257bb757be6d1a67eed11198bf64f257ccfb0/GlobalLandTemperaturesByMajorCity.csv")
     st.write(GlobalTemp)
 
-Russia = temp[temp['Country']=='Russia']
+Russia = GlobalTempCountry[GlobalTempCountry['Country']=='Russia']
 Russia['year'] = pd.to_datetime(india['dt']).dt.year
 
 new_Russia = Russia.groupby('year')['AverageTemperature'].mean().reset_index()
