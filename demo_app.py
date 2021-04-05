@@ -20,8 +20,8 @@ with st.echo(code_location='below'):
     GlobalTempMajorCity = pd.read_csv("https://gist.githubusercontent.com/TimurTalipov/7b1b830dbdec4fe9e6a3816ab5a0e08d/raw/eac257bb757be6d1a67eed11198bf64f257ccfb0/GlobalLandTemperaturesByMajorCity.csv")
     st.write(GlobalTemp)
 
-country_temp = GlobalTempCountry.groupby(by = ['Country']).mean().reset_index()
-fig3 = px.choropleth(country_temp, locations="Country", locationmode = "country names", color="AverageTemperature",
+    country_temp = GlobalTempCountry.groupby(by = ['Country']).mean().reset_index()
+    fig3 = px.choropleth(country_temp, locations="Country", locationmode = "country names", color="AverageTemperature",
                     color_continuous_scale=px.colors.diverging.BrBG,
                     title="Average Temperature Contrywise Worldwide")
-fig3.show()
+    fig3.show()
