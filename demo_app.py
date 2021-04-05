@@ -13,9 +13,9 @@ with st.echo(code_location='below'):
     """
     This is a test.
     """
-    GlobalTemp = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalTemperatures.csv")
-    GlobalTempCountry = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalLandTemperaturesByCountry.csv")
-    GlobalTempState = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalLandTemperaturesByState.csv")
+    GlobalTemp = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalTemperatures.csv",)
+    GlobalTempCountry = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalLandTemperaturesByCountry.csv",)
+    GlobalTempState = pd.read_csv("https://github.com/TimurTalipov/DataScience1stproject/blob/main/GlobalLandTemperaturesByState.csv",)
 
     st.write(GlobalTemp)
 
