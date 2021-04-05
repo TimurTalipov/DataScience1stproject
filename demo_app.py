@@ -2,7 +2,8 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 import streamlit.components.v1 as components
-from celluloid import Camera
+import pandas as pd
+ from celluloid import Camera
 
 # Based on this recipe:
 # https://discuss.streamlit.io/t/matplotlib-animation-in-streamlit-through-html-js/5587
