@@ -4,9 +4,9 @@ import numpy as np
 import streamlit.components.v1 as components
 import pandas as pd
 import plotly.graph_objects as go
+import plotly.express as px
 from celluloid import Camera
 from pandas import read_csv
-from plotly.offline import iplot,plot
 # Based on this recipe:
 # https://discuss.streamlit.io/t/matplotlib-animation-in-streamlit-through-html-js/5587
 with st.echo(code_location='below'):
@@ -20,9 +20,8 @@ with st.echo(code_location='below'):
     GlobalTempMajorCity = pd.read_csv("https://gist.githubusercontent.com/TimurTalipov/7b1b830dbdec4fe9e6a3816ab5a0e08d/raw/eac257bb757be6d1a67eed11198bf64f257ccfb0/GlobalLandTemperaturesByMajorCity.csv")
     st.write(GlobalTemp)
 
-Russia = GlobalTempCountry[GlobalTempCountry['Country']=='Russia']
-Russia['year'] = pd.to_datetime(Russia['dt']).dt.year
-
-new_Russia = Russia.groupby('year')['AverageTemperature'].mean().reset_index()
-new_Russia.plot(kind='scatter', x='year', y='AverageTemperature', title='Temperature trend in Russia',
-               xTitle='Year', yTitle='Temperature')
+country_temp = GlobalTempCountry.groupby(by = ['Country']).mean().reset_index()
+fig3 = px.choropleth(country_temp, locations="Country", locationmode = "country names", color="AverageTemperature",
+                    color_continuous_scale=px.colors.diverging.BrBG,
+                    title="Average Temperature Contrywise Worldwide")
+fig3.show()
