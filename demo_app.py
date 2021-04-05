@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import streamlit.components.v1 as components
 import pandas as pd
- from celluloid import Camera
+import plotly.graph_objects as go
+from celluloid import Camera
 
 # Based on this recipe:
 # https://discuss.streamlit.io/t/matplotlib-animation-in-streamlit-through-html-js/5587
