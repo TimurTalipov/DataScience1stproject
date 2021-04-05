@@ -13,14 +13,10 @@ with st.echo(code_location='below'):
     """
     This is a test.
     """
-    GlobalTemp = pd.read_csv("C:/Users/Xiaomi/PycharmProjects/DataScience1stproject/GlobalTemperatures.csv",
-                             parse_dates=['dt'])
-    GlobalTempCountry = pd.read_csv(
-        "C:/Users/Xiaomi/PycharmProjects/DataScience1stproject/GlobalLandTemperaturesByCountry.csv",
-        parse_dates=['dt'])
-    GlobalTempState = pd.read_csv(
-        "C:/Users/Xiaomi/PycharmProjects/DataScience1stproject/GlobalLandTemperaturesByState.csv",
-        parse_dates=['dt'])
+    GGlobalTemp = pd.read_csv("/kaggle/input/climate-change-earth-surface-temperature-data/GlobalTemperatures.csv", parse_dates= ['dt'])
+GlobalTempCountry = pd.read_csv("/kaggle/input/climate-change-earth-surface-temperature-data/GlobalLandTemperaturesByCountry.csv", parse_dates= ['dt'])
+GlobalTempState = pd.read_csv("/kaggle/input/climate-change-earth-surface-temperature-data/GlobalLandTemperaturesByState.csv", parse_dates= ['dt'])
+
 
     GlobalTemp.head(5)
 
