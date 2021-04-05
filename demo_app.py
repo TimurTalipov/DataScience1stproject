@@ -11,13 +11,73 @@ with st.echo(code_location='below'):
     """
     This is a test.
     """
-    x = np.linspace(0, 10, 500)
-    fig = plt.figure()
-    camera = Camera(fig)
-    for i in range(10):
-        plt.plot(x, np.sin(x + i))
-        plt.ylim(-2, 2)
-        camera.snap()
-    animation = camera.animate()
+    GlobalTemp = pd.read_csv("/kaggle/input/climate-change-earth-surface-temperature-data/GlobalTemperatures.csv",
+                             parse_dates=['dt'])
+    GlobalTempCountry = pd.read_csv(
+        "/kaggle/input/climate-change-earth-surface-temperature-data/GlobalLandTemperaturesByCountry.csv",
+        parse_dates=['dt'])
+    GlobalTempState = pd.read_csv(
+        "/kaggle/input/climate-change-earth-surface-temperature-data/GlobalLandTemperaturesByState.csv",
+        parse_dates=['dt'])
 
-    components.html(animation.to_jshtml(), height=1000)
+    GlobalTemp.head(5)
+
+    GlobalTemp.rename(columns={'dt': 'Date'}, inplace=True)
+    Year_Temp = GlobalTemp.groupby(GlobalTemp['Date'].dt.year)['LandAverageTemperature', 'LandMaxTemperature',
+                                                               'LandMinTemperature', 'LandAndOceanAverageTemperature'].mean().reset_index()
+    Year_Temp.rename(columns={'Date': 'Year'}, inplace=True)
+
+    fig = go.Figure()
+
+    # Add traces
+    fig.add_trace(go.Scatter(x=Year_Temp.Year, y=Year_Temp.LandAverageTemperature,
+                             mode='lines',
+                             name='LandAvgTemp',
+                             marker_color='#A9A9A9'))
+    fig.add_trace(go.Scatter(x=Year_Temp.Year, y=Year_Temp.LandMaxTemperature,
+                             mode='lines',
+                             name='LandMaxAvgTemp',
+                             marker_color='#BDB76B'))
+    fig.add_trace(go.Scatter(x=Year_Temp.Year, y=Year_Temp.LandMinTemperature,
+                             mode='lines',
+                             name='LandMinAvgTemp',
+                             marker_color='#45CE30'))
+
+    fig.add_trace(go.Scatter(x=Year_Temp.Year, y=Year_Temp.LandAndOceanAverageTemperature,
+                             mode='lines',
+                             name='Land&OceanAvgTemp',
+                             marker_color='#FFA07A'))
+    fig.update_layout(
+        height=800,
+        xaxis_title="Years",
+        yaxis_title='Temperatures in degree',
+        title_text='Average Land, Ocean, Minimun, and Maximum Temperatures over the years'
+    )
+    fig.add_annotation(
+        x=1950,
+        y=2.7,
+        text="1950")
+    fig.add_annotation(
+        x=1972,
+        y=8.4,
+        text="1972")
+    fig.add_annotation(
+        x=1978,
+        y=14.28,
+        text="1978")
+    fig.add_annotation(
+        x=1969,
+        y=15.31,
+        text="1969")
+    fig.update_annotations(dict(
+        xref="x",
+        yref="y",
+        showarrow=True,
+        arrowhead=7,
+        ax=0,
+        ay=-40
+    ))
+
+    fig.update_layout(showlegend=True)
+
+    fig.show()
