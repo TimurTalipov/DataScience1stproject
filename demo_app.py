@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from celluloid import Camera
 from pandas import read_csv
-from plotly.offline import iplot
+from plotly.offline import iplot,plot
 # Based on this recipe:
 # https://discuss.streamlit.io/t/matplotlib-animation-in-streamlit-through-html-js/5587
 with st.echo(code_location='below'):
@@ -24,5 +24,5 @@ Russia = GlobalTempCountry[GlobalTempCountry['Country']=='Russia']
 Russia['year'] = pd.to_datetime(Russia['dt']).dt.year
 
 new_Russia = Russia.groupby('year')['AverageTemperature'].mean().reset_index()
-new_Russia.iplot(kind='scatter', x='year', y='AverageTemperature', title='Temperature trend in Russia',
+new_Russia.plot(kind='scatter', x='year', y='AverageTemperature', title='Temperature trend in Russia',
                xTitle='Year', yTitle='Temperature')
