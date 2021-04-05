@@ -20,7 +20,7 @@ with st.echo(code_location='below'):
     st.write(GlobalTemp)
 
 Russia = GlobalTempCountry[GlobalTempCountry['Country']=='Russia']
-Russia['year'] = pd.to_datetime(india['dt']).dt.year
+Russia['year'] = pd.to_datetime(Russia['dt']).dt.year
 
 new_Russia = Russia.groupby('year')['AverageTemperature'].mean().reset_index()
 new_Russia.iplot(kind='scatter', x='year', y='AverageTemperature', title='Temperature trend in Russia',
