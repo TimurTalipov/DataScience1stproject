@@ -19,15 +19,17 @@ with st.echo(code_location='below'):
     GlobalTempCountry = pd.read_csv("GlobalLandTemperaturesByCountry.csv")
     GlobalTempState = pd.read_csv("GlobalLandTemperaturesByState.csv")
     GlobalTempMajorCity = pd.read_csv("GlobalLandTemperaturesByMajorCity.csv")
-    GlobalTempCountry.dropna(axis=0, inplace=True)
     GlobalTempMajorCity.dropna(axis=0, inplace=True)
+    GlobalTempState.dropna(axis=0, inplace=True)
     countries = np.unique(GlobalTempCountry['Country'])
     majorcities = np.unique(GlobalTempMajorCity['City'])
 
     """ 
-   Сначала Посмотрим на среднюю температуру стран
+   Сначала посмотрим на среднюю температуру стран
     """
-   ### FROM: https://www.kaggle.com/benthecoder/exploratory-data-analysis-with-python ( я менял параметры но смысл отсюда)
+
+    GlobalTempCountry.dropna(axis=0, inplace=True)
+    ### FROM: https://www.kaggle.com/benthecoder/exploratory-data-analysis-with-python ( я менял параметры но смысл отсюда)
     mean_temp = []
     for country in countries:
         mean_temp.append(GlobalTempCountry[GlobalTempCountry['Country'] == country]['AverageTemperature'].mean())
@@ -38,8 +40,9 @@ with st.echo(code_location='below'):
     f, ax = plt.subplots(figsize=(5, 50))
     colors_cw = sns.color_palette('magma', len(countries))
     sns.barplot(mean_temp_bar, countries_bar, palette=colors_cw[::-1])
-    Text = ax.set(xlabel='Average temperature', title='Average  temperature in countries and lands') ### END FROM
+    Text = ax.set(xlabel='Average temperature', title='Average  temperature in countries and lands')  ### END FROM
     st.pyplot(f)
+
     """ Посмотрим на среднюю температуру крупных городов
     """
     mean_temp_cities = []
@@ -65,6 +68,24 @@ with st.echo(code_location='below'):
     st.subheader("А теперь давайте займемся Россией и интерактивными штуками")
     """
     Для того чтобы получить данные пришлось повозиться, так как изначанльый размер >30 МБ, но я успешно справился с задачей
+    РАБОТАЕТ МЕДЛЕННО,но ведь работает(невероятно), лучше выбирать более поздние года, для более точных данных.
     """
+    GlobalTempState = GlobalTempState.rename(columns={'1743-11-01':'Date','4.537':'AverageTemperature','Adygey':'State'})
     oblast = np.unique(GlobalTempState['State'])
-    select=st.selectbox('Выберите область',oblast)
+    select = st.selectbox('Выберите область', oblast)
+    god= st.slider("выберите год начала отсчета",min_value=1750,max_value=2010)
+    GlobalTempState['Date'] = pd.to_datetime(GlobalTempState['Date'])
+    GlobalTempState['year'] = GlobalTempState['Date'].dt.year
+    GlobalTempState['month'] = GlobalTempState['Date'].dt.month_name()
+    GlobalTempState['day'] = GlobalTempState['Date'].dt.day
+    select_temp = GlobalTempState[GlobalTempState['State'] == select]
+    yearly_avg_temperature = pd.DataFrame(select_temp.groupby('year')['AverageTemperature'].mean()).reset_index()
+    yearly_avg_temperature = yearly_avg_temperature[yearly_avg_temperature['year'] > god]
+    fig3=plt.figure(figsize=(13, 7))
+    plt.plot(yearly_avg_temperature['year'], yearly_avg_temperature['AverageTemperature'], label='Average Temperature')
+    plt.legend()
+    st.pyplot(fig3)
+    st.subheader("Как вам глобальное потепление,друзья?")
+
+    """"Настало время красоты"""
+
