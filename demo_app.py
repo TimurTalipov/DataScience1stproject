@@ -70,7 +70,7 @@ with st.echo(code_location='below'):
     Для того чтобы получить данные пришлось повозиться, так как изначанльый размер >30 МБ, но я успешно справился с задачей
     РАБОТАЕТ МЕДЛЕННО,но ведь работает(невероятно), лучше выбирать более поздние года, для более точных данных.
     """
-    GlobalTempState = GlobalTempState.rename(columns={'1743-11-01':'Date','4.537':'AverageTemperature','Adygey':'State'})
+    GlobalTempState = GlobalTempState.rename(columns={'dt':'Date','4.537':'AverageTemperature','Adygey':'State'})
     oblast = np.unique(GlobalTempState['State'])
     select = st.selectbox('Выберите область', oblast)
     god= st.slider("выберите год начала отсчета",min_value=1750,max_value=2010)
