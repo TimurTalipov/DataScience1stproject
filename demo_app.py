@@ -8,6 +8,7 @@ import plotly.express as px
 from celluloid import Camera
 from pandas import read_csv
 import seaborn as sns
+import plotly.offline as py
 
 with st.echo(code_location='below'):
     st.title("Hello, World!")
@@ -15,15 +16,18 @@ with st.echo(code_location='below'):
     Добро пожаловать! Сегодня мы будем исследовать температуру и все что с ней связано
     """
     GlobalTemp = pd.read_csv(r"C:\Users\Xiaomi\PycharmProjects\DataScience1stproject/GlobalTemperatures.csv")
-    GlobalTempCountry = pd.read_csv(r"C:\Users\Xiaomi\PycharmProjects\DataScience1stproject/GlobalLandTemperaturesByCountry.csv")
-    GlobalTempState = pd.read_csv(r"C:\Users\Xiaomi\PycharmProjects\DataScience1stproject/GlobalLandTemperaturesByState.csv")
-    GlobalTempMajorCity = pd.read_csv(r"C:\Users\Xiaomi\PycharmProjects\DataScience1stproject/GlobalLandTemperaturesByMajorCity.csv")
+    GlobalTempCountry = pd.read_csv("GlobalLandTemperaturesByCountry.csv")
+    GlobalTempState = pd.read_csv("GlobalLandTemperaturesByState.csv")
+    GlobalTempMajorCity = pd.read_csv("GlobalLandTemperaturesByMajorCity.csv")
     GlobalTempCountry.dropna(axis=0, inplace=True)
     GlobalTempMajorCity.dropna(axis=0, inplace=True)
     countries = np.unique(GlobalTempCountry['Country'])
     majorcities = np.unique(GlobalTempMajorCity['City'])
-    st.write(countries)
-    st.write(majorcities)
+
+    """ 
+   Сначала Посмотрим на среднюю температуру стран
+    """
+   ### FROM: https://www.kaggle.com/benthecoder/exploratory-data-analysis-with-python ( я менял параметры но смысл отсюда)
     mean_temp = []
     for country in countries:
         mean_temp.append(GlobalTempCountry[GlobalTempCountry['Country'] == country]['AverageTemperature'].mean())
@@ -34,9 +38,10 @@ with st.echo(code_location='below'):
     f, ax = plt.subplots(figsize=(5, 50))
     colors_cw = sns.color_palette('magma', len(countries))
     sns.barplot(mean_temp_bar, countries_bar, palette=colors_cw[::-1])
-    Text = ax.set(xlabel='Average temperature', title='Average  temperature in countries and lands')
+    Text = ax.set(xlabel='Average temperature', title='Average  temperature in countries and lands') ### END FROM
     st.pyplot(f)
-
+    """ Посмотрим на среднюю температуру крупных городов
+    """
     mean_temp_cities = []
     for city in majorcities:
         mean_temp_cities.append(GlobalTempMajorCity[GlobalTempMajorCity['City'] == city]['AverageTemperature'].mean())
@@ -57,4 +62,9 @@ with st.echo(code_location='below'):
     """
     st.subheader("И вообще, кто-то из вас мог себе представить, что Рим теплее Мадрида, и что Богота(средняя высота над уровнем моря 2640 м), теплее чем Сан Пауло?")
 
-
+    st.subheader("А теперь давайте займемся Россией и интерактивными штуками")
+    """
+    Для того чтобы получить данные пришлось повозиться, так как изначанльый размер >30 МБ, но я успешно справился с задачей
+    """
+    oblast = np.unique(GlobalTempState['State'])
+    select=st.selectbox('Выберите область',oblast)
