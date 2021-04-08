@@ -9,9 +9,6 @@ from celluloid import Camera
 from pandas import read_csv
 import seaborn as sns
 
-
-# Based on this recipe:
-# https://discuss.streamlit.io/t/matplotlib-animation-in-streamlit-through-html-js/5587
 with st.echo(code_location='below'):
     st.title("Hello, World!")
     """
