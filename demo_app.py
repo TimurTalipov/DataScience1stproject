@@ -7,7 +7,6 @@ import plotly.graph_objects as go
 import plotly.express as px
 from celluloid import Camera
 from pandas import read_csv
-import cufflinks as cf
 import seaborn as sns
 
 
