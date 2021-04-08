@@ -1,5 +1,5 @@
-numpy==1.19.5
-matplotlib==3.3.4
+numpy
+matplotlib
 streamlit==0.79.0
 celluloid == 0.2.0
 plotly
