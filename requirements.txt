@@ -4,3 +4,4 @@ streamlit==0.79.0
 celluloid == 0.2.0
 plotly
 pandas
+seaborn
