@@ -15,7 +15,7 @@ with st.echo(code_location='below'):
     """
     Добро пожаловать! Сегодня мы будем исследовать температуру и все что с ней связано
     """
-    GlobalTemp = pd.read_csv(r"C:\Users\Xiaomi\PycharmProjects\DataScience1stproject/GlobalTemperatures.csv")
+    #GlobalTemp = pd.read_csv(r"C:\Users\Xiaomi\PycharmProjects\DataScience1stproject/GlobalTemperatures.csv")
     GlobalTempCountry = pd.read_csv("GlobalLandTemperaturesByCountry.csv")
     GlobalTempState = pd.read_csv("GlobalLandTemperaturesByState.csv")
     GlobalTempMajorCity = pd.read_csv("GlobalLandTemperaturesByMajorCity.csv")
