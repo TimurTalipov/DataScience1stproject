@@ -11,7 +11,7 @@ import seaborn as sns
 import plotly.offline as py
 
 with st.echo(code_location='below'):
-    st.title("Hello, BAE'23!")
+    st.title("Hello, BAE'23!, Сайт работает очень медленно, так что наберитесь терпения!")
     """
     Добро пожаловать! Сегодня мы будем исследовать температуру и все что с ней связано
     """
