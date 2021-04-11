@@ -74,10 +74,10 @@ with st.echo(code_location='below'):
     oblast = np.unique(GlobalTempState['State'])
     select = st.selectbox('Выберите область', oblast)
     god= st.slider("выберите год начала отсчета",min_value=1750,max_value=2010)
-    GlobalTempState['Date'] = pd.to_datetime(GlobalTempState['Date'])
-    GlobalTempState['year'] = GlobalTempState['Date'].dt.year
-    GlobalTempState['month'] = GlobalTempState['Date'].dt.month_name()
-    GlobalTempState['day'] = GlobalTempState['Date'].dt.day
+    GlobalTempState['dt'] = pd.to_datetime(GlobalTempState['dt'])
+    GlobalTempState['year'] = GlobalTempState['dt'].dt.year
+    GlobalTempState['month'] = GlobalTempState['dt'].dt.month_name()
+    GlobalTempState['day'] = GlobalTempState['dt'].dt.day
     select_temp = GlobalTempState[GlobalTempState['State'] == select]
     yearly_avg_temperature = pd.DataFrame(select_temp.groupby('year')['AverageTemperature'].mean()).reset_index()
     yearly_avg_temperature = yearly_avg_temperature[yearly_avg_temperature['year'] > god]
