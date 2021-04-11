@@ -71,7 +71,6 @@ with st.echo(code_location='below'):
     Для того чтобы получить данные пришлось повозиться, так как изначанльый размер >30 МБ, но я успешно справился с задачей
     РАБОТАЕТ МЕДЛЕННО,но ведь работает(невероятно), лучше выбирать более поздние года, для более точных данных.
     """
-    GlobalTempState = GlobalTempState.rename(columns={'1743-11-01':'Date','4.537':'AverageTemperature','Adygey':'State'})
     oblast = np.unique(GlobalTempState['State'])
     select = st.selectbox('Выберите область в России или штат в США', oblast)
     god= st.slider("выберите год начала отсчета",min_value=1750,max_value=2010)
@@ -82,7 +81,7 @@ with st.echo(code_location='below'):
     select_temp = GlobalTempState[GlobalTempState['State'] == select]
     yearly_avg_temperature = pd.DataFrame(select_temp.groupby('year')['AverageTemperature'].mean()).reset_index()
     yearly_avg_temperature = yearly_avg_temperature[yearly_avg_temperature['year'] > god]
-    fig3=plt.figure(figsize=(13, 7))
+    fig3=plt.figure(figsize=(20, 10))
     plt.plot(yearly_avg_temperature['year'], yearly_avg_temperature['AverageTemperature'], label='Average Temperature')
     plt.legend()
     st.pyplot(fig3)
